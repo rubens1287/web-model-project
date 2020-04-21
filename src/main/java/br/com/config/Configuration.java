@@ -10,6 +10,7 @@ public interface Configuration extends Config {
     @Key("url.base")
     String url();
 
+    @Key("timeout")
     String timeout();
 
     @Key("grid.url")

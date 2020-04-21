@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.gft</groupId>
-	<artifactId>api-model-project</artifactId>
+	<artifactId>web-model-project</artifactId>
 	<version>1.0</version>
 
 	<properties>
@@ -154,6 +154,7 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
+		<!--AeonBits - Responsavel por gerenciar as properties-->
 		<dependency>
 			<groupId>org.aeonbits.owner</groupId>
 			<artifactId>owner</artifactId>

@@ -1,11 +1,12 @@
 package hooks;
 
-import br.com.config.Configuration;
 import br.com.driver.DriverFactory;
 import br.com.driver.DriverManager;
+import br.com.report.Report;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.AfterStep;
 import cucumber.api.java.Before;
-import org.aeonbits.owner.ConfigCache;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 
@@ -18,13 +19,15 @@ public class Hook  {
         String env = System.getProperty("env");
         ConfigFactory.setProperty("env", env == null ? enviroment : env);
         WebDriver driver = DriverFactory.createInstance(System.getProperty("browser"));
+        driver.manage().window().maximize();
         DriverManager.setDriver(driver);
     }
 
     @After
-    public void end(){
-        DriverManager.quit();
+    public void end(Scenario scenario){
+        DriverManager.quit(scenario);
     }
+
 }
 
 

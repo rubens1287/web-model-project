@@ -24,6 +24,10 @@
 
 package br.com.driver;
 
+import br.com.config.Configuration;
+import br.com.report.Report;
+import cucumber.api.Scenario;
+import org.aeonbits.owner.ConfigCache;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -31,8 +35,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-
-    private  DriverManager() {}
+    public static final Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
 
     public static WebDriver getDriver() {
         return  driver.get();
@@ -42,7 +45,10 @@ public class DriverManager {
         DriverManager.driver.set(driver);
     }
 
-    public static void quit() {
+    public static void quit(Scenario scenario) {
+        if (scenario.isFailed()) {
+            Report.TakeScreenShot( DriverManager.driver.get());
+        }
         DriverManager.driver.get().quit();
     }
 

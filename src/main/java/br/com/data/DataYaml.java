@@ -2,13 +2,14 @@ package br.com.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.junit.Assert;
-
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 
+@Log4j2
 public class DataYaml {
 
     private static File getYamlDataFile(String fileName){
@@ -22,10 +23,10 @@ public class DataYaml {
         Map<String , Object> maps;
         LinkedHashMap<String,String> values = null;
         try {
-            maps = (Map<String, Object>)  mapper.readValue(getYamlDataFile(fileName), Map.class);
+            maps = (Map<String, Object>) mapper.readValue(getYamlDataFile(fileName), Map.class);
             values = (LinkedHashMap<String, String>) maps.get(titulo);
         } catch (IOException e) {
-            Assert.fail("Erro ao tentar ler o arquivo de massa "+fileName+".yaml - stackTrace: " + e);
+            log.error("Erro ao tentar ler o arquivo de massa "+fileName+".yaml - stackTrace: " + e);
         }
         return values;
     }

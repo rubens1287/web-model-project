@@ -1,20 +1,26 @@
 package steps;
 
 import br.com.data.DataYaml;
+import br.com.driver.DriverManager;
 import br.com.pages.HomePage;
 import br.com.pages.LoginPage;
+import br.com.report.Report;
+import cucumber.api.java.AfterStep;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 
 public class LoginSteps {
 
-    LoginPage loginPage = new LoginPage();
-    HomePage homePage = new HomePage();
+    private LoginPage loginPage = new LoginPage();
+    private HomePage homePage = new HomePage();
+
 
     @Dado("eu estou na pagina de login")
     public void eu_estou_na_pagina_de_login() {
+
         loginPage.acessaAplicacao();
+
     }
 
     @Quando("eu efetuar o login com credencias validas")
