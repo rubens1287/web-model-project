@@ -22,41 +22,39 @@
  * SOFTWARE.
  */
 
-package br.com.driver;
+package driver;
 
-import br.com.config.Configuration;
-import br.com.report.Report;
-import cucumber.api.Scenario;
+import config.Configuration;
+import driver.local.LocalDriverManager;
+import driver.remote.RemoteDriverManager;
+import lombok.extern.log4j.Log4j2;
 import org.aeonbits.owner.ConfigCache;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class DriverManager {
+@Log4j2
+public class DriverFactory {
 
-    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    public static final Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
 
-    public static WebDriver getDriver() {
-        return  driver.get();
-    }
+    public static WebDriver createInstance(String browser) {
+        Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
+        Target target = Target.valueOf(configuration.target().toUpperCase());
+        WebDriver webdriver;
 
-    public static void setDriver(WebDriver driver) {
-        DriverManager.driver.set(driver);
-    }
+        switch (target) {
 
-    public static void quit(Scenario scenario) {
-        if (scenario.isFailed()) {
-            Report.TakeScreenShot( DriverManager.driver.get());
+            case LOCAL:
+                webdriver = new LocalDriverManager().createInstance(browser);
+                break;
+            case GRID:
+                webdriver = new RemoteDriverManager().createInstance(browser);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + target);
         }
-        DriverManager.driver.get().quit();
+        return webdriver;
     }
 
-    public static String getInfo() {
-        Capabilities cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
-        String browserName = cap.getBrowserName();
-        String platform = cap.getPlatform().toString();
-        String version = cap.getVersion();
-        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
+    enum Target {
+        LOCAL, GRID
     }
 }

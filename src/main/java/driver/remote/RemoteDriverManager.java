@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-package br.com.driver.remote;
+package driver.remote;
 
 
-import br.com.config.Configuration;
-import br.com.driver.IDriver;
+import config.Configuration;
+import driver.IDriver;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import lombok.extern.log4j.Log4j2;
 import org.aeonbits.owner.ConfigCache;

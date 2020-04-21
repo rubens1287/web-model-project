@@ -22,31 +22,41 @@
  * SOFTWARE.
  */
 
-package br.com.driver.local;
+package driver;
 
-import br.com.driver.IDriver;
-import io.github.bonigarcia.wdm.DriverManagerType;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import lombok.extern.log4j.Log4j2;
+import config.Configuration;
+import report.Report;
+import cucumber.api.Scenario;
+import org.aeonbits.owner.ConfigCache;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-@Log4j2
-public class LocalDriverManager implements IDriver {
+public class DriverManager {
 
-    @Override
-    public WebDriver createInstance(String browser) {
-         WebDriver driver = null;
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public static final Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
 
-        try {
-            DriverManagerType driverManagerType = DriverManagerType.valueOf(browser.toUpperCase());
-            Class<?> driverClass = Class.forName(driverManagerType.browserClass());
-            WebDriverManager.getInstance(driverManagerType).setup();
-            driver = (WebDriver) driverClass.newInstance();
-        } catch (IllegalAccessException | ClassNotFoundException e) {
-            log.error("The class could not be found", e);
-        } catch (InstantiationException e) {
-            log.error("Problem during driver instantiation", e);
+    public static WebDriver getDriver() {
+        return  driver.get();
+    }
+
+    public static void setDriver(WebDriver driver) {
+        DriverManager.driver.set(driver);
+    }
+
+    public static void quit(Scenario scenario) {
+        if (scenario.isFailed()) {
+            Report.TakeScreenShot( DriverManager.driver.get());
         }
-        return driver;
+        DriverManager.driver.get().quit();
+    }
+
+    public static String getInfo() {
+        Capabilities cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
+        String browserName = cap.getBrowserName();
+        String platform = cap.getPlatform().toString();
+        String version = cap.getVersion();
+        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
     }
 }

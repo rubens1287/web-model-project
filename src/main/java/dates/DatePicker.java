@@ -1,4 +1,4 @@
-package br.com.dates;
+package dates;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

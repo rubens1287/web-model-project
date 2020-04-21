@@ -1,11 +1,10 @@
 package hooks;
 
-import br.com.driver.DriverFactory;
-import br.com.driver.DriverManager;
-import br.com.report.Report;
+import driver.DriverFactory;
+import driver.DriverManager;
+import report.Report;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
-import cucumber.api.java.AfterStep;
 import cucumber.api.java.Before;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;

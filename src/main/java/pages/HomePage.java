@@ -1,8 +1,8 @@
-package br.com.pages;
+package pages;
 
-import br.com.driver.DriverManager;
-import br.com.report.Report;
-import br.com.support.Verifications;
+import driver.DriverManager;
+import report.Report;
+import support.Verifications;
 import org.openqa.selenium.By;
 
 public class HomePage extends DriverManager{

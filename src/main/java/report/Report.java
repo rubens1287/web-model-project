@@ -1,6 +1,6 @@
-package br.com.report;
+package report;
 
-import br.com.driver.DriverManager;
+import driver.DriverManager;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

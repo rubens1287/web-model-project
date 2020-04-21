@@ -1,4 +1,4 @@
-package br.com.driver;
+package driver;
 
 import org.openqa.selenium.WebDriver;
 

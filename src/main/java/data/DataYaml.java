@@ -1,8 +1,7 @@
-package br.com.data;
+package data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import java.io.File;
 import java.io.IOException;

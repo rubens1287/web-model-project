@@ -1,11 +1,10 @@
 package steps;
 
-import br.com.data.DataYaml;
-import br.com.driver.DriverManager;
-import br.com.pages.HomePage;
-import br.com.pages.LoginPage;
-import br.com.report.Report;
-import cucumber.api.java.AfterStep;
+import data.DataYaml;
+import driver.DriverManager;
+import pages.HomePage;
+import pages.LoginPage;
+import report.Report;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;

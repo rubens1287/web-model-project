@@ -22,39 +22,31 @@
  * SOFTWARE.
  */
 
-package br.com.driver;
+package driver.local;
 
-import br.com.config.Configuration;
-import br.com.driver.local.LocalDriverManager;
-import br.com.driver.remote.RemoteDriverManager;
+import driver.IDriver;
+import io.github.bonigarcia.wdm.DriverManagerType;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.log4j.Log4j2;
-import org.aeonbits.owner.ConfigCache;
 import org.openqa.selenium.WebDriver;
 
 @Log4j2
-public class DriverFactory {
+public class LocalDriverManager implements IDriver {
 
+    @Override
+    public WebDriver createInstance(String browser) {
+         WebDriver driver = null;
 
-    public static WebDriver createInstance(String browser) {
-        Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
-        Target target = Target.valueOf(configuration.target().toUpperCase());
-        WebDriver webdriver;
-
-        switch (target) {
-
-            case LOCAL:
-                webdriver = new LocalDriverManager().createInstance(browser);
-                break;
-            case GRID:
-                webdriver = new RemoteDriverManager().createInstance(browser);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + target);
+        try {
+            DriverManagerType driverManagerType = DriverManagerType.valueOf(browser.toUpperCase());
+            Class<?> driverClass = Class.forName(driverManagerType.browserClass());
+            WebDriverManager.getInstance(driverManagerType).setup();
+            driver = (WebDriver) driverClass.newInstance();
+        } catch (IllegalAccessException | ClassNotFoundException e) {
+            log.error("The class could not be found", e);
+        } catch (InstantiationException e) {
+            log.error("Problem during driver instantiation", e);
         }
-        return webdriver;
-    }
-
-    enum Target {
-        LOCAL, GRID
+        return driver;
     }
 }
