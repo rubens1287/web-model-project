@@ -12,7 +12,7 @@ import java.util.Map;
 public class LoginPage extends DriverManager {
 
     private By txtUsuario = By.name("email");
-    private By txtSenha = By.name("senha1");
+    private By txtSenha = By.name("senha");
     private By btnEntrar = By.xpath("//button");
 
 
