@@ -8,6 +8,7 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 
 *   Java 1.8 SDK
 *   Maven 3.5.*
+*   Navegador Web (Chrome, Opera, FireFox, Edge ou Safari)
 *   Intellij IDE
 *   Plugins do Intellij
     * Cumcuber for java
