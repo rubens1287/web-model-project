@@ -23,7 +23,7 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 | src\main\java\br\com\dates 	| Metodos de suporte para trabalhar com datas                                                              	|
 | src\main\java\br\com\driver 	| Responsável por fabricar os drivers para rodar local e remoto para varios navegadores                    	|
 | src\main\java\br\com\pages	| Local onde deve ser criado as pages objects para facilitar a manutenção do projeto                       	|
-| src\main\java\br\com\report	| Metodo responsável pela criação de screen shot anexada no Report Alure                                	|
+| src\main\java\br\com\report	| Metodo responsável pela criação de screenshot anexada no Report Alure                                	|
 | src\main\java\br\com\support	| Metodos de suporte a interação com os elementos web fazendo ações de click e esperas explicitas          	|
 | src\main\resources\conf	    | Arquivos de configuração segregados por ambiente                                                        	|
 | src\test\java\hooks          	| Metodos que executam antes e depois de cada teste (@Before, @After)                                   	|
