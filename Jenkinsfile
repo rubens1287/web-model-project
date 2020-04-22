@@ -5,21 +5,19 @@ pipeline {
         jdk 'java'
     }
     stages {
-        stage('Code and Dependencies'){
-            parallel{
-                stage('Checkout Code'){
-                steps{
-                        git credentialsId: 'f14a9113-76cf-49ea-9aa6-dfe18f79af18', url: 'https://git.gft.com/latam-qa-practice/automation-assets/web-model-project.git'
-                    }
+        stage('Install Dependencies'){
+            steps{
+                if (isUnix()) {
+                    sh 'docker pull elgalu/selenium'
+                    sh 'docker pull dosel/zalenium'
+                } else {
+                     bat 'docker pull elgalu/selenium'
+                     bat 'docker pull dosel/zalenium'
                 }
-                stage('Install Dependencies'){
-                    steps{
-                        bat 'docker pull elgalu/selenium'
-                        bat 'docker pull dosel/zalenium'
-                    }
-               }
-             }
+
+            }
         }
+
     }
     stage ('Start Zalenium'){
         steps{
