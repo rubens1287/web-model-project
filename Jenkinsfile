@@ -33,9 +33,9 @@ pipeline {
 			steps{
 				script {
 					if (isUnix()) {
-						sh 'mvn clean test -Dbrowser=chrome'
+						sh 'mvn clean test -Denv=des -Dbrowser=chrome'
 					} else {
-						bat 'mvn clean test -Dbrowser=chrome'
+						bat 'mvn clean test -Denv=des -Dbrowser=chrome'
 					}
 				}
 			}
