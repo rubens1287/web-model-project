@@ -92,4 +92,4 @@ Os arquivos com as evidências ficam localizados na pasta target do projeto, est
 
 ## LOG DE EXECUÇÃO
 
-Os logs de execução gerados pelo Log4j2 ficam alocados na pasta log na raiz do projeto.
+Os logs de execução gerados pelo Log4j2 ficam alocados na pasta target/log
