@@ -22,8 +22,7 @@ public class LoginPage extends DriverManager {
     public void acessaAplicacao(){
 
        getDriver().get(configuration.url());
-        Verifications.verifyElementIsClickable(getDriver(),txtUsuario,
-                Integer.parseInt(configuration.timeout()));
+        Verifications.verifyElementIsClickable(txtUsuario);
         Report.TakeScreenShot();
         log.info("Acesso a aplicacao efetuado com sucesso");
     }

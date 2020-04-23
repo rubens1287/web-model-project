@@ -13,6 +13,7 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 *   Plugins do Intellij
     * Cumcuber for java
     * Lombok
+    * Ideolog 
 
 ## ESTRUTURA DO PROJETO
 

@@ -131,11 +131,10 @@ public class Verifications extends DriverManager {
      * Verifies if an element is visible and Clickable
      *
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
      * @return checking an element is visible and can be clicked
      * @author Rubens Lobo
      */
-    public static void verifyElementIsClickable(WebDriver driver, By by, int seconds) {
+    public static void verifyElementIsClickable(By by) {
         log.info(String.format("Verificando se o elemento via locator %s e visivel e clicavel", by.toString()));
         WebElement element = Action.getClickableElement(by);
         highlightElement(element);
