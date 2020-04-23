@@ -51,7 +51,7 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 * Cucumber - Responsável pela especificação executável de cenários
 * AssertJ - Especializado com mais tipos de validação
 * Lombok - Otimização de classes modelos
-* Log4j - Responsável pelo Log do projeto
+* Log4j2 - Responsável pelo Log do projeto
 * AeonBits - Responsável por gerenciar as properties
 
 ## COMANDO PARA EXECUTAR OS TESTES
@@ -89,3 +89,7 @@ Os arquivos com as evidências ficam localizados na pasta target do projeto, est
  Json Cucumber: target\json-cucumber-reports\cucumber.json
  Xml Junit: tagert\xml-junit\junit.xml
 ```
+
+## LOG DE EXECUÇÃO
+
+Os logs de execução gerados pelo Log4j2 ficam alocados na pasta log na raiz do projeto.
