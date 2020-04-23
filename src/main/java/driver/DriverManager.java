@@ -47,7 +47,7 @@ public class DriverManager {
 
     public static void quit(Scenario scenario) {
         if (scenario.isFailed()) {
-            Report.TakeScreenShot( DriverManager.driver.get());
+            Report.TakeScreenShot();
         }
         DriverManager.driver.get().quit();
     }

@@ -27,8 +27,9 @@ public class Hook  {
 
     @After
     public void end(Scenario scenario){
-        log.info("TESTE FINALIZADO: " + scenario.getName());
         DriverManager.quit(scenario);
+        log.info("TESTE FINALIZADO: " + scenario.getName());
+        log.info("TESTE STATUS: " + scenario.getStatus());
     }
 
 }

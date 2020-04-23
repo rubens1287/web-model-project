@@ -3,6 +3,7 @@ package pages;
 import driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import report.Report;
+import support.Action;
 import support.Verifications;
 import org.openqa.selenium.By;
 
@@ -23,15 +24,15 @@ public class LoginPage extends DriverManager {
        getDriver().get(configuration.url());
         Verifications.verifyElementIsClickable(getDriver(),txtUsuario,
                 Integer.parseInt(configuration.timeout()));
-        Report.TakeScreenShot(getDriver());
+        Report.TakeScreenShot();
         log.info("Acesso a aplicacao efetuado com sucesso");
     }
 
     public void executaLogin(Map data){
-        getDriver().findElement(txtUsuario).sendKeys((CharSequence) data.get("usuario"));
+        Action.setText(txtUsuario,(CharSequence)data.get("usuario"));
         getDriver().findElement(txtSenha).sendKeys((CharSequence) data.get("senha"));
-        Report.TakeScreenShot(getDriver());
-        getDriver().findElement(btnEntrar).click();
+        Report.TakeScreenShot();
+        Action.clickOnElement(btnEntrar);
         log.info("Login na aplicacao efetuado com sucesso");
     }
 

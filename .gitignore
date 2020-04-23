@@ -2,10 +2,9 @@
 .settings
 .scannerwork
 .allure
+log/
 target/
 output/
-src/test/resources/drivers
-src/test/java/runner/parallel
 .classpath
 .project
 .DS_Store
@@ -14,7 +13,7 @@ src/test/java/runner/parallel
 *.pdb
 *.user
 *.aps
-#*.exe
+*.exe
 *.pch
 *.vspscc
 *_i.c

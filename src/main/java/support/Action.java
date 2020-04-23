@@ -1,5 +1,6 @@
 package support;
 
+import driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,20 +14,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @since 13/05/2018
  */
 @Log4j2
-public class Action {
+public class Action extends DriverManager{
 
 
     /**
      * Returns an existing element from the screen
      *
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
-     * @param driver  driver of the application
      * @return Returns an existing element from the screen
      * @author Rubens Lobo
      */
-    public static WebElement getExistingElement(WebDriver driver, By by, int seconds) {
-        return new WebDriverWait(driver, seconds).until(ExpectedConditions.presenceOfElementLocated(by));
+    public static WebElement getExistingElement(By by) {
+        log.info(String.format("Retornando um elemento web via locator %s ", by.toString()));
+        return new WebDriverWait(getDriver(),
+                Integer.parseInt(configuration.timeout()))
+                .until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
 
@@ -34,26 +36,28 @@ public class Action {
      * Returns a visible element from the screen
      *
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
-     * @param driver  driver of the application
      * @return Returns an visible element from the screen
      * @author Rubens Lobo
      */
-    public static WebElement getVisibleElement(WebDriver driver, By by, int seconds) {
-        return new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
+    public static WebElement getVisibleElement(By by) {
+        log.info(String.format("Retornando um elemento web via locator %s ", by.toString()));
+        return new WebDriverWait(getDriver(),
+                Integer.parseInt(configuration.timeout()))
+                .until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     /**
      * Returns a clickable element from the screen
      *
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
-     * @param driver  driver of the application
      * @return Returns a clickable element from the screen
      * @author Rubens Lobo
      */
-    public static WebElement getClickableElement(WebDriver driver, By by, int seconds) {
-        return new WebDriverWait(driver, seconds).until(ExpectedConditions.elementToBeClickable(by));
+    public static WebElement getClickableElement(By by) {
+        log.info(String.format("Retornando um elemento web via locator %s ", by.toString()));
+        return new WebDriverWait(getDriver(),
+                Integer.parseInt(configuration.timeout()))
+                .until(ExpectedConditions.elementToBeClickable(by));
     }
 
 
@@ -61,26 +65,24 @@ public class Action {
      * Clears the Text Field of a WebElement
      *
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
-     * @param driver  driver of the application
      * @author Rubens Lobo
      */
-    public static void clearField(WebDriver driver, By by, int seconds) {
-        WebElement element = getClickableElement(driver, by, seconds);
+    public static void clearField(By by) {
+        WebElement element = getClickableElement(by);
+        log.info(String.format("Limpando o campo texto do elemento web via locator %s ", by.toString()));
         element.clear();
     }
 
     /**
      * Enters text in a WebElement Text Field
      *
-     * @param driver  driver of the application
      * @param by      Type of "By"
      * @param text    set a text to web element
-     * @param seconds Waits for the defined time set as parameter
      * @author Rubens Lobo
      */
-    public static void setText(WebDriver driver, By by, String text, int seconds) {
-        WebElement element = getClickableElement(driver, by, seconds);
+    public static void setText(By by, CharSequence text) {
+        WebElement element = getClickableElement(by);
+        log.info(String.format("Inserindo texto no elemento web via locator %s ", by.toString()));
         element.click();
         element.clear();
         element.sendKeys(text);
@@ -89,15 +91,13 @@ public class Action {
     /**
      * Gets text from a WebElement Text Field
      *
-     * @param driver  driver of the application
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
      * @author Rubens Lobo
      */
-    public static String getText(WebDriver driver, By by, int seconds) {
-
+    public static String getText(By by) {
         String textExtracted = null;
-        WebElement element = Action.getVisibleElement(driver, by, seconds);
+        WebElement element = Action.getVisibleElement(by);
+        log.info(String.format("Pegando o valor de um elemento web via locator %s ", by.toString()));
         if (element != null) {
             textExtracted = element.getText().trim();
         } else {
@@ -110,16 +110,14 @@ public class Action {
     /**
      * Gets text by attribute in a WebElement Text Field
      *
-     * @param driver    driver of the application
      * @param by        Type of "By"
-     * @param seconds   Waits for the defined time set as parameter
      * @param attribute get text value thought of the tag name
      * @author Rubens Lobo
      */
-    public static String getTextAttribute(WebDriver driver, By by, String attribute, int seconds) {
-
+    public static String getTextAttribute(By by, String attribute) {
         String textExtracted = null;
-        WebElement element = Action.getVisibleElement(driver, by, seconds);
+        WebElement element = Action.getVisibleElement(by);
+        log.info(String.format("Pegando o texto de um atributo do elemento via locator %s ", by.toString()));
         if (element != null) {
             textExtracted = element.getAttribute(attribute).trim();
         } else {
@@ -132,14 +130,13 @@ public class Action {
     /**
      * Clicks in the web element
      *
-     * @param driver  driver of the application
      * @param by      Type of "By"
-     * @param seconds Waits for the defined time set as parameter
      * @author Rubens Lobo
      */
-    public static void clickOnElement(WebDriver driver, By by, int seconds) {
+    public static void clickOnElement(By by) {
         //if the object is not enabled or visible, this line finalizes the test, but if the object exists the method returns a AppWeb Element object
-        WebElement element = getClickableElement(driver, by, seconds);
+        WebElement element = getClickableElement(by);
+        log.info(String.format("Clicando no elemento web via locator %s ", by.toString()));
         //Clicks at the element requested
         element.click();
     }
