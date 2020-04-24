@@ -11,9 +11,8 @@ public class HomePage extends DriverManager{
 
     private By lblBemVindo = By.xpath("//div[contains(text(),'Bem vindo')]");
 
-    public void validaAcesso(){
+    public boolean isPresentHomePage(){
         Report.TakeScreenShot();
-        Verifications.verifyElementIsVisible(lblBemVindo);
-        log.info("Menu principal foi apresentado!");
+        return Verifications.verifyElementIsVisible(lblBemVindo);
     }
 }

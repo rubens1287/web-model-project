@@ -2,13 +2,10 @@ package support;
 
 import driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
-import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.assertj.core.api.Fail.fail;
-import static org.junit.Assert.assertTrue;
 
 @Log4j2
 public class Verifications extends DriverManager {
@@ -32,7 +29,6 @@ public class Verifications extends DriverManager {
                 wait(1);
                 ((JavascriptExecutor) getDriver()).executeScript("arguments[0].style.border=''", element);
                 ((JavascriptExecutor) getDriver()).executeScript("arguments[0].style.border=''", element);
-                log.info(String.format("Highlight no elemento web via locator %s ", element.toString()));
             }
         } catch (Exception e) {
             log.error(String.format("O elemento não esta visivel para o Highlight: %s", e));
@@ -46,7 +42,6 @@ public class Verifications extends DriverManager {
      * @author Rubens Lobo
      */
     public static void wait(int seconds) {
-        log.info(String.format("Aguardando %s segundos ", seconds));
         try {
             Thread.sleep(seconds * 1000L);
         } catch (InterruptedException e) {
@@ -61,10 +56,11 @@ public class Verifications extends DriverManager {
      * @param by      Type of "By"
      * @author Rubens Lobo
      */
-    public static void verifyElementExists(By by) {
+    public static boolean verifyElementExists(By by) {
         log.info(String.format("Verificando se o elemento via locator %s existe na tela", by.toString()));
         WebElement element = Action.getExistingElement(by);
         highlightElement(element);
+        return true;
     }
 
     /**
@@ -75,11 +71,12 @@ public class Verifications extends DriverManager {
      * @param expectedText is the text expected to be matched on screen
      * @author Rubens Lobo
      */
-    public static void verifyElementAttributeContains(By by, String attribute, String expectedText) {
+    public static boolean verifyElementAttributeContains(By by, String attribute, String expectedText) {
         log.info(String.format("Verificando se o texto esperado faz parte do valor do atributo do elemento via locator %s ", by.toString()));
         WebElement element = Action.getClickableElement(by);
-        assertTrue(element.getAttribute(attribute).contains(expectedText));
         highlightElement(element);
+        return element.getAttribute(attribute).contains(expectedText);
+
     }
 
     /**
@@ -89,7 +86,7 @@ public class Verifications extends DriverManager {
      * @param expectedText is the text expected to be matched on screen
      * @author Rubens Lobo
      */
-    public static void verifyTextsElementClickable(By by, String expectedText) {
+    public static boolean verifyTextsElementClickable(By by, String expectedText) {
         log.info(String.format("Verificando se o elemento via locator %s e clicavel e contem o texto esperado", by.toString()));
         WebElement element = Action.getClickableElement(by);
         int timeout = 0;
@@ -97,11 +94,12 @@ public class Verifications extends DriverManager {
             Verifications.wait(1);
             if (timeout == Integer.parseInt(configuration.timeout())) {
                 log.error("Elemento via locator " + by.toString() + " nao encontrado na pagina atual!");
-                Assert.fail();
+                return false;
             }
             timeout++;
         }
         highlightElement(element);
+        return true;
     }
 
 
@@ -112,7 +110,7 @@ public class Verifications extends DriverManager {
      * @param expectedText is the text to be entered expected to be matched on screen
      * @author Rubens Lobo
      */
-    public static void verifyTextsExistingElement(By by, String expectedText) {
+    public static boolean verifyTextsExistingElement(By by, String expectedText) {
         log.info(String.format("Verificando se o elemento via locator %s existe e se contem o texto esperado", by.toString()));
         WebElement element = Action.getExistingElement(by);
         int timeout = 0;
@@ -120,11 +118,12 @@ public class Verifications extends DriverManager {
             Verifications.wait(1);
             if (timeout == Integer.parseInt(configuration.timeout())) {
                 log.error("Elemento via locator " + by.toString() + " nao encontrado na pagina atual!");
-                Assert.fail();
+                return false;
             }
             timeout++;
         }
         highlightElement(element);
+        return true;
     }
 
     /**
@@ -134,10 +133,11 @@ public class Verifications extends DriverManager {
      * @return checking an element is visible and can be clicked
      * @author Rubens Lobo
      */
-    public static void verifyElementIsClickable(By by) {
+    public static boolean verifyElementIsClickable(By by) {
         log.info(String.format("Verificando se o elemento via locator %s e visivel e clicavel", by.toString()));
         WebElement element = Action.getClickableElement(by);
         highlightElement(element);
+        return true;
     }
 
     /**
@@ -146,10 +146,11 @@ public class Verifications extends DriverManager {
      * @param by      Type of "By"
      * @author Rubens Lobo
      */
-    public static void verifyElementIsVisible(By by) {
+    public static boolean verifyElementIsVisible(By by) {
         log.info(String.format("Verificando o elemento via locator %s e visivel", by.toString()));
         WebElement element = Action.getVisibleElement(by);
         highlightElement(element);
+        return true;
     }
 
     /**

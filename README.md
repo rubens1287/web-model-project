@@ -50,7 +50,7 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 * Allure - report em HTML
 * Java Faker - Geracão de dados sintéticos
 * Cucumber - Responsável pela especificação executável de cenários
-* AssertJ - Especializado com mais tipos de validação
+* Cucumber Junit - Responsável por validar as condições de teste
 * Lombok - Otimização de classes modelos
 * Log4j2 - Responsável pelo Log do projeto
 * AeonBits - Responsável por gerenciar as properties

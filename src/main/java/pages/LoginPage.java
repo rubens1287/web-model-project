@@ -17,14 +17,18 @@ public class LoginPage extends DriverManager {
     private By txtUsuario = By.name("email");
     private By txtSenha = By.name("senha");
     private By btnEntrar = By.xpath("//button");
+    private By abaLogin = By.xpath("//a[contains(text(),'Login')]");
 
 
     public void acessaAplicacao(){
-
-       getDriver().get(configuration.url());
-        Verifications.verifyElementIsClickable(txtUsuario);
+        getDriver().get(configuration.url());
         Report.TakeScreenShot();
         log.info("Acesso a aplicacao efetuado com sucesso");
+    }
+
+    public boolean isPresentLoginPage(){
+        return  Verifications.verifyTextsElementClickable(abaLogin,"Login")
+                && Verifications.verifyElementIsClickable(txtUsuario);
     }
 
     public void executaLogin(Map data){
@@ -34,6 +38,5 @@ public class LoginPage extends DriverManager {
         Action.clickOnElement(btnEntrar);
         log.info("Login na aplicacao efetuado com sucesso");
     }
-
 
 }
