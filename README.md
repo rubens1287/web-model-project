@@ -98,7 +98,7 @@ Configurações necessárias para rodar o pipeline no Jenkins
 *   Plugins
     * [Allure Jenkins Plugin](https://plugins.jenkins.io/allure-jenkins-plugin)
    
-### PIPELINE
+### ETAPAS
 
 * Java e Maven no contexto do jenkins
 * Download do Zalenium como infraestrutura 
