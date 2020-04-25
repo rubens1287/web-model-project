@@ -33,7 +33,7 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 | src\test\resources\data      	| Massa de dados segregada por ambiente, escritos em arquivos yaml                                      	|
 | src\test\resources\features 	| Funcionalidade e cenários de teste escritos em linguagem DSL (Gherkin language)                        	|   
     
-## DOWNLOAD DO PROJETO TEMPALTE PARA SUA MÁQUINA LOCAL
+## DOWNLOAD DO PROJETO TEMPLATE PARA SUA MÁQUINA LOCAL
 
 Faça o donwload do template no repositório de código para utilizar no seu projeto em especifico, 
 feito isso, fique a vontande para usufruir dos recursos disponíveis e 
