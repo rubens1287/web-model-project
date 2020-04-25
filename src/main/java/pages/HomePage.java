@@ -7,11 +7,12 @@ import support.Verifications;
 import org.openqa.selenium.By;
 
 @Log4j2
-public class HomePage extends DriverManager{
+public class HomePage extends DriverManager implements BaseValidationPage {
 
     private By lblBemVindo = By.xpath("//div[contains(text(),'Bem vindo')]");
 
-    public boolean isPresentHomePage(){
+    @Override
+    public boolean isPresent() {
         Report.TakeScreenShot();
         return Verifications.verifyElementIsVisible(lblBemVindo);
     }

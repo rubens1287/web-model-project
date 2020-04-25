@@ -17,7 +17,7 @@ public class LoginSteps {
     @Dado("eu estou na pagina de login")
     public void eu_estou_na_pagina_de_login() {
         loginPage.acessaAplicacao();
-        Assert.assertTrue(loginPage.isPresentLoginPage());
+        Assert.assertTrue(loginPage.isPresent());
     }
 
     @Quando("eu efetuar o login com credencias validas")
@@ -27,6 +27,6 @@ public class LoginSteps {
 
     @Entao("sera apresentado a tela do menu principal")
     public void sera_apresentado_a_tela_do_menu_principal() {
-        Assert.assertTrue(homePage.isPresentHomePage());
+        Assert.assertTrue(homePage.isPresent());
     }
 }

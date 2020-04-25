@@ -67,7 +67,7 @@ pipeline {
      }
     post {
         always {
-            junit allowEmptyResults: true, testResults: 'target/xml-junit/junit.xml'
+            junit allowEmptyResults: true, testResults: 'target/xml-junit/*.xml'
             archiveArtifacts artifacts: 'target/log/*.log'
         }
     }

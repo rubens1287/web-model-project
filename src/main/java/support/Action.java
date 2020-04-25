@@ -26,8 +26,7 @@ public class Action extends DriverManager{
      */
     public static WebElement getExistingElement(By by) {
         log.info(String.format("Retornando um elemento web via locator %s ", by.toString()));
-        return new WebDriverWait(getDriver(),
-                Integer.parseInt(configuration.timeout()))
+        return new WebDriverWait(getDriver(),configuration.timeout())
                 .until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
@@ -41,8 +40,7 @@ public class Action extends DriverManager{
      */
     public static WebElement getVisibleElement(By by) {
         log.info(String.format("Retornando um elemento web via locator %s ", by.toString()));
-        return new WebDriverWait(getDriver(),
-                Integer.parseInt(configuration.timeout()))
+        return new WebDriverWait(getDriver(),configuration.timeout())
                 .until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
@@ -55,8 +53,7 @@ public class Action extends DriverManager{
      */
     public static WebElement getClickableElement(By by) {
         log.info(String.format("Retornando um elemento web via locator %s ", by.toString()));
-        return new WebDriverWait(getDriver(),
-                Integer.parseInt(configuration.timeout()))
+        return new WebDriverWait(getDriver(),configuration.timeout())
                 .until(ExpectedConditions.elementToBeClickable(by));
     }
 
@@ -80,12 +77,12 @@ public class Action extends DriverManager{
      * @param text    set a text to web element
      * @author Rubens Lobo
      */
-    public static void setText(By by, CharSequence text) {
+    public static void setText(By by, Object text) {
         WebElement element = getClickableElement(by);
         log.info(String.format("Inserindo texto no elemento web via locator %s ", by.toString()));
         element.click();
         element.clear();
-        element.sendKeys(text);
+        element.sendKeys((CharSequence) text);
     }
 
     /**

@@ -90,9 +90,9 @@ public class Verifications extends DriverManager {
         log.info(String.format("Verificando se o elemento via locator %s e clicavel e contem o texto esperado", by.toString()));
         WebElement element = Action.getClickableElement(by);
         int timeout = 0;
-        while (!(element.getText().trim().equals(expectedText)) && (timeout <= Integer.parseInt(configuration.timeout()))) {
+        while (!(element.getText().trim().equals(expectedText)) && (timeout <= configuration.timeout())) {
             Verifications.wait(1);
-            if (timeout == Integer.parseInt(configuration.timeout())) {
+            if (timeout == configuration.timeout()) {
                 log.error("Elemento via locator " + by.toString() + " nao encontrado na pagina atual!");
                 return false;
             }
@@ -114,9 +114,9 @@ public class Verifications extends DriverManager {
         log.info(String.format("Verificando se o elemento via locator %s existe e se contem o texto esperado", by.toString()));
         WebElement element = Action.getExistingElement(by);
         int timeout = 0;
-        while (!(element.getText().trim().equals(expectedText)) && (timeout <= Integer.parseInt(configuration.timeout()))) {
+        while (!(element.getText().trim().equals(expectedText)) && (timeout <= configuration.timeout())) {
             Verifications.wait(1);
-            if (timeout == Integer.parseInt(configuration.timeout())) {
+            if (timeout == configuration.timeout()) {
                 log.error("Elemento via locator " + by.toString() + " nao encontrado na pagina atual!");
                 return false;
             }
@@ -161,7 +161,7 @@ public class Verifications extends DriverManager {
      */
     public static void verifyElementDoesNotExist(By by) {
         log.info(String.format("Verificando se o elemento via locator %s nao esta visivel na tela", by.toString()));
-        WebDriverWait wait = new WebDriverWait(getDriver(), Integer.parseInt(configuration.timeout()));
+        WebDriverWait wait = new WebDriverWait(getDriver(), configuration.timeout());
         ExpectedCondition elementIsDisplayed = (ExpectedCondition<Boolean>) webDriver -> {
             try {
                 getDriver().findElement(by).isDisplayed();

@@ -81,6 +81,34 @@ podendo escolher também a massa de dados que irá utilizar e juntamente aplicar
 mvn clean test -Dcucumber.options="--tags @dev" -Denv=des allure:report
 ```
 
+## TESTES CONTINUOS
+
+### JENKINS
+
+Executar testes de forma continua vem se tornado fundamental para agregar valor junto a seu time,
+para isto foi configurado o pipeline para ser aplicado ao jenkins chamando "Jenkinsfile"
+localizado na raiz do projeto
+
+### PRE-REQUISITOS
+
+Configurações necessárias para rodar o pipeline no Jenkins
+
+*   [Allure configurado no Jenkins](https://docs.qameta.io/allure/#_jenkins)
+*   [Docker instalado na máquina agente](https://www.docker.com/products/docker-desktop)
+*   Plugins
+    * [Allure Jenkins Plugin](https://plugins.jenkins.io/allure-jenkins-plugin)
+   
+### PIPELINE
+
+* Java e Maven no contexto do jenkins
+* Download do Zalenium como infraestrutura 
+* Execução dos containers do Zalenium
+* Execução dos testes
+* Geração do Report com Allure
+* Encerramento da infraestrutura do Zalenium
+* Upload dos arquivos junit.xml e exec_logs.log
+
+
 ## EVIDÊNCIAS
 
 Os arquivos com as evidências ficam localizados na pasta target do projeto, esta pasta só é criada depois da primeira execução.
