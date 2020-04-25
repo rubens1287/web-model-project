@@ -56,7 +56,7 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 
 ## COMANDO PARA EXECUTAR OS TESTES
 
-Com o git bash acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para rodar os testes automatizados.
+Com o prompt de comando acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para rodar os testes automatizados.
 
 ```
 mvn clean test
@@ -64,7 +64,7 @@ mvn clean test
 
 ## COMANDO PARA GERAR EVIDÊNCIAS EM HTML (ALLURE)
 
-Com o git bash acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para rodar os testes automatizados.
+Com o prompt de comando acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para gerar as evidências em HTML
 
 ```
 mvn allure:report
