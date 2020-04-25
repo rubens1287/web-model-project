@@ -33,13 +33,12 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 | src\test\resources\data      	| Massa de dados segregada por ambiente, escritos em arquivos yaml                                      	|
 | src\test\resources\features 	| Funcionalidade e cenários de teste escritos em linguagem DSL (Gherkin language)                        	|   
     
-## CLONE O PROJETO PARA SUA MÁQUINA LOCAL
+## DOWNLOAD DO PROJETO TEMPALTE PARA SUA MÁQUINA LOCAL
 
-Abra o git bash, entre no diretório escolhido na sua máquina e faça o download do projeto com o comando abaixo.
+Faça o donwload no repositório de código para utilizar no seu projeto especifico, 
+feito isso, fique a vontande para usufruir dos recursos disponíveis e 
+também customizar de acordo com sua necessidade. 
 
-```
-git clone https://git.gft.com/latam-qa-practice/automation-assets/web-model-project.git
-```
 
 ## FRAMEWORKS UTILIZADOS
 
