@@ -1,6 +1,6 @@
 package pages;
 
-public interface BaseValidationPage {
+public interface CommonTestingType {
 
     boolean isPresent();
 }

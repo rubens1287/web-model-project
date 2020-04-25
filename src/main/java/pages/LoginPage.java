@@ -9,11 +9,9 @@ import org.openqa.selenium.By;
 
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Log4j2
-public class LoginPage extends DriverManager implements BaseValidationPage {
+public class LoginPage extends DriverManager implements CommonTestingType {
 
     private By txtUsuario = By.name("email");
     private By txtSenha = By.name("senha");

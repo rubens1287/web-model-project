@@ -7,7 +7,7 @@ import support.Verifications;
 import org.openqa.selenium.By;
 
 @Log4j2
-public class HomePage extends DriverManager implements BaseValidationPage {
+public class HomePage extends DriverManager implements CommonTestingType {
 
     private By lblBemVindo = By.xpath("//div[contains(text(),'Bem vindo')]");
 

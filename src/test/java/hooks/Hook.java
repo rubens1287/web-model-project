@@ -17,10 +17,8 @@ public class Hook  {
     @Before
     public void init(Scenario scenario) {
         log.info(String.format("TESTE INICIADO: %s",scenario.getName()));
-        log.info("Construindo objeto SPEC com as definições globais de requisição");
-        String enviroment = null;
-        String env = System.getProperty("env");
-        ConfigFactory.setProperty("env", env == null ? enviroment : env);
+
+        ConfigFactory.setProperty("env", System.getProperty("env"));
         WebDriver driver = DriverFactory.createInstance(System.getProperty("browser"));
         driver.manage().window().maximize();
         DriverManager.setDriver(driver);
