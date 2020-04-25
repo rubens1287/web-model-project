@@ -16,7 +16,8 @@ public class Hook  {
 
     @Before
     public void init(Scenario scenario) {
-        log.info("TESTE INICIADO: " + scenario.getName());
+        log.info(String.format("TESTE INICIADO: %s",scenario.getName()));
+        log.info("Construindo objeto SPEC com as definições globais de requisição");
         String enviroment = null;
         String env = System.getProperty("env");
         ConfigFactory.setProperty("env", env == null ? enviroment : env);
@@ -28,8 +29,8 @@ public class Hook  {
     @After
     public void end(Scenario scenario){
         DriverManager.quit(scenario);
-        log.info("TESTE FINALIZADO: " + scenario.getName());
-        log.info("TESTE STATUS: " + scenario.getStatus());
+        log.info(String.format("TESTE FINALIZADO: %s",scenario.getName()));
+        log.info(String.format("TESTE STATUS: %s",scenario.getStatus()));
     }
 
 }
