@@ -27,7 +27,7 @@ public class DataYaml {
         Map<String , Object> maps;
         try {
             maps = (LinkedHashMap<String, Object>) mapper.readValue(getYamlDataFile(fileName), Map.class);
-            log.error(String.format("Retornando objeto HashMap com a massa de dados do arquivo %s com titulo %s",fileName,titulo));
+            log.info(String.format("Retornando objeto HashMap com a massa de dados do arquivo %s com titulo %s",fileName,titulo));
             return  (LinkedHashMap<String, String>) maps.get(titulo);
         } catch (IOException e) {
             log.error("Erro ao tentar ler o arquivo de massa "+fileName+".yaml - stackTrace: " + e);
