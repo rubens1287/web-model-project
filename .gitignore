@@ -1,7 +1,6 @@
 .idea
 .settings
 .scannerwork
-.allure
 log/
 target/
 output/
