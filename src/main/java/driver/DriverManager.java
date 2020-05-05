@@ -35,6 +35,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static ThreadLocal<Scenario> scenario = new ThreadLocal<>();
     public static final Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
 
     public static WebDriver getDriver() {
@@ -45,9 +46,17 @@ public class DriverManager {
         DriverManager.driver.set(driver);
     }
 
+    public static ThreadLocal<Scenario> getScenario() {
+        return scenario;
+    }
+
+    public static void setScenario(Scenario scenario) {
+        DriverManager.scenario.set(scenario);
+    }
+
     public static void quit(Scenario scenario) {
         if (scenario.isFailed()) {
-            Report.TakeScreenShot();
+            Report.takeScreenShot();
         }
         DriverManager.driver.get().quit();
     }

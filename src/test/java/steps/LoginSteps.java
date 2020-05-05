@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import data.DataYaml;
 import org.junit.Assert;
 import pages.HomePage;
@@ -28,5 +29,16 @@ public class LoginSteps {
     @Entao("sera apresentado a tela do menu principal")
     public void sera_apresentado_a_tela_do_menu_principal() {
         Assert.assertTrue(homePage.isPresent());
+    }
+
+    @Quando("^eu efetuar o login com credencias invalidas$")
+    public void euEfetuarOLoginComCredenciasInvalidas() throws Throwable {
+        loginPage.executaLogin(DataYaml.getMapYamlValues("Usuarios","credenciais_invalidas"));
+
+    }
+
+    @Entao("^sera apresentado uma mensagem de erro$")
+    public void seraApresentadoUmaMensagemDeErro() throws Throwable {
+       Assert.assertTrue(loginPage.isErrorMsg());
     }
 }

@@ -3,7 +3,6 @@ package hooks;
 import driver.DriverFactory;
 import driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
-import report.Report;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -16,6 +15,7 @@ public class Hook  {
 
     @Before
     public void init(Scenario scenario) {
+        DriverManager.setScenario(scenario);
         log.info(String.format("TESTE INICIADO: %s",scenario.getName()));
 
         ConfigFactory.setProperty("env", System.getProperty("env"));

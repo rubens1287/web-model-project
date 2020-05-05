@@ -13,7 +13,9 @@ public class HomePage extends DriverManager implements CommonTestingType {
 
     @Override
     public boolean isPresent() {
-        Report.TakeScreenShot();
+        Report.takeScreenShot();
         return Verifications.verifyElementIsVisible(lblBemVindo);
     }
+
+
 }
