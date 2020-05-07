@@ -19,6 +19,8 @@ public class Hook  {
         log.info(String.format("TESTE INICIADO: %s",scenario.getName()));
 
         ConfigFactory.setProperty("env", System.getProperty("env"));
+
+
         WebDriver driver = DriverFactory.createInstance(System.getProperty("browser"));
         driver.manage().window().maximize();
         DriverManager.setDriver(driver);
