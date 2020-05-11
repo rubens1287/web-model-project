@@ -2,6 +2,7 @@
 package driver;
 
 import config.Configuration;
+import localization.MessageParser;
 import report.Report;
 import cucumber.api.Scenario;
 import org.aeonbits.owner.ConfigCache;
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class DriverManager {
+
+    private static MessageParser parser = new MessageParser();
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static ThreadLocal<Scenario> scenario = new ThreadLocal<>();
@@ -44,6 +47,6 @@ public class DriverManager {
         String browserName = cap.getBrowserName();
         String platform = cap.getPlatform().toString();
         String version = cap.getVersion();
-        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
+        return parser.parse("driver.manager.info", new Object[]{browserName, version, platform});
     }
 }

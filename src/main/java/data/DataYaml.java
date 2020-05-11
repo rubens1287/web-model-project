@@ -2,6 +2,7 @@ package data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import localization.MessageParser;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
@@ -13,9 +14,10 @@ import java.util.*;
 @Log4j2
 public class DataYaml {
 
+    private static MessageParser parser = new MessageParser();
+
     private static File getYamlDataFile(String fileName){
-        log.info(String.format("Pegando arquivo %s.yaml com a massa de dados do ambiente %s"
-                ,fileName,System.getProperty("env")));
+        log.info(parser.parse("data.yaml.get.file", new Object[]{fileName,System.getProperty("env")}));
         return new File("./src/test/resources/data/"+System.getProperty("env")+"/"+fileName+".yml");
     }
 
@@ -27,10 +29,10 @@ public class DataYaml {
         Map<String , Object> maps;
         try {
             maps = (LinkedHashMap<String, Object>) mapper.readValue(getYamlDataFile(fileName), Map.class);
-            log.info(String.format("Retornando objeto HashMap com a massa de dados do arquivo %s com titulo %s",fileName,titulo));
+            log.info(parser.parse("data.yaml.return", new Object[]{fileName,titulo}));
             return  (LinkedHashMap<String, String>) maps.get(titulo);
         } catch (IOException e) {
-            log.error("Erro ao tentar ler o arquivo de massa "+fileName+".yaml - stackTrace: " + e);
+            log.error(parser.parse("data.yaml.error", new Object[]{fileName,e}));
             throw new Exception(e);
         }
     }

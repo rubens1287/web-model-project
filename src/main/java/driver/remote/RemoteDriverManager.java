@@ -5,6 +5,7 @@ package driver.remote;
 import config.Configuration;
 import driver.IDriver;
 import io.github.bonigarcia.wdm.DriverManagerType;
+import localization.MessageParser;
 import lombok.extern.log4j.Log4j2;
 import org.aeonbits.owner.ConfigCache;
 import org.openqa.selenium.MutableCapabilities;
@@ -22,6 +23,8 @@ import java.net.URL;
 @Log4j2
 public class RemoteDriverManager implements IDriver {
 
+    private static MessageParser parser = new MessageParser();
+
     @Override
     public WebDriver createInstance(String browser) {
         RemoteWebDriver remoteWebDriver = null;
@@ -32,10 +35,10 @@ public class RemoteDriverManager implements IDriver {
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), getCapability(browser));
         } catch (MalformedURLException e) {
-            log.error("Grid URL is invalid or Grid is not available");
-            log.error("Browser: " +  browser, e);
+            log.error(parser.parse("remote.driver.manager.malformed.url.exception"));
+            log.error(parser.parse("remote.driver.manager.malformed.url.exception.browser", new Object[]{browser, e}));
         } catch (IllegalArgumentException e) {
-            log.error("Browser: " +  browser + "is not valid or recognized", e);
+            log.error(parser.parse("remote.driver.manager.illegal.argument.exception", new Object[]{browser, e}));
         }
 
         return remoteWebDriver;
@@ -64,9 +67,11 @@ public class RemoteDriverManager implements IDriver {
                 break;
             case PHANTOMJS:
             case SELENIUM_SERVER_STANDALONE:
-                throw new IllegalStateException("Not supported: " + driverManagerType);
+                throw new IllegalStateException(parser.parse("remote.driver.manager.not.supported",
+                        new Object[]{driverManagerType}));
             default:
-                throw new IllegalStateException("Unexpected value: " + driverManagerType);
+                throw new IllegalStateException(parser.parse("remote.driver.manager.unexpected",
+                        new Object[]{driverManagerType}));
         }
 
         return mutableCapabilities;
