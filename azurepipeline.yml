@@ -8,7 +8,6 @@ steps:
   displayName: 'Install Docker 17.09.0-ce'
 
 - script: |
-   docker pull elgalu/selenium
    docker pull dosel/zalenium
   displayName: 'pull imagens docker'
 
