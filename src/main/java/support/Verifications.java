@@ -1,6 +1,7 @@
 package support;
 
 import driver.DriverManager;
+import localization.MessageParser;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Log4j2
 public class Verifications extends DriverManager {
 
+    private static MessageParser parser = new MessageParser();
 
     private Verifications() {
         throw new IllegalStateException();
@@ -31,7 +33,7 @@ public class Verifications extends DriverManager {
                 ((JavascriptExecutor) getDriver()).executeScript("arguments[0].style.border=''", element);
             }
         } catch (Exception e) {
-            log.error(String.format("O elemento não esta visivel para o Highlight: %s", e));
+            log.error(parser.parse("verifications.highlight.error", new Object[]{e}));
         }
     }
 
@@ -53,11 +55,11 @@ public class Verifications extends DriverManager {
     /**
      * Verifies an existing element on the screen
      *
-     * @param by      Type of "By"
+     * @param by Type of "By"
      * @author Rubens Lobo
      */
     public static boolean verifyElementExists(By by) {
-        log.info(String.format("Verificando se o elemento via locator %s existe na tela", by.toString()));
+        log.info(parser.parse("verifications.verify.element.exists", new Object[]{by.toString()}));
         WebElement element = Action.getExistingElement(by);
         highlightElement(element);
         return true;
@@ -72,7 +74,7 @@ public class Verifications extends DriverManager {
      * @author Rubens Lobo
      */
     public static boolean verifyElementAttributeContains(By by, String attribute, String expectedText) {
-        log.info(String.format("Verificando se o texto esperado faz parte do valor do atributo do elemento via locator %s ", by.toString()));
+        log.info(parser.parse("verifications.verify.element.contains", new Object[]{by.toString()}));
         WebElement element = Action.getClickableElement(by);
         highlightElement(element);
         return element.getAttribute(attribute).contains(expectedText);
@@ -87,13 +89,13 @@ public class Verifications extends DriverManager {
      * @author Rubens Lobo
      */
     public static boolean verifyTextsElementClickable(By by, String expectedText) {
-        log.info(String.format("Verificando se o elemento via locator %s e clicavel e contem o texto esperado", by.toString()));
+        log.info(parser.parse("verifications.verify.element.clickable", new Object[]{by.toString()}));
         WebElement element = Action.getClickableElement(by);
         int timeout = 0;
         while (!(element.getText().trim().equals(expectedText)) && (timeout <= configuration.timeout())) {
             Verifications.wait(1);
             if (timeout == configuration.timeout()) {
-                log.error("Elemento via locator " + by.toString() + " nao encontrado na pagina atual!");
+                log.error(parser.parse("verifications.element.not.found", new Object[]{by.toString()}));
                 return false;
             }
             timeout++;
@@ -111,13 +113,13 @@ public class Verifications extends DriverManager {
      * @author Rubens Lobo
      */
     public static boolean verifyTextsExistingElement(By by, String expectedText) {
-        log.info(String.format("Verificando se o elemento via locator %s existe e se contem o texto esperado", by.toString()));
+        log.info(parser.parse("verifications.verify.text.existing.element", new Object[]{by.toString()}));
         WebElement element = Action.getExistingElement(by);
         int timeout = 0;
         while (!(element.getText().trim().equals(expectedText)) && (timeout <= configuration.timeout())) {
             Verifications.wait(1);
             if (timeout == configuration.timeout()) {
-                log.error("Elemento via locator " + by.toString() + " nao encontrado na pagina atual!");
+                log.error(parser.parse("verifications.element.not.found", new Object[]{by.toString()}));
                 return false;
             }
             timeout++;
@@ -129,12 +131,12 @@ public class Verifications extends DriverManager {
     /**
      * Verifies if an element is visible and Clickable
      *
-     * @param by      Type of "By"
+     * @param by Type of "By"
      * @return checking an element is visible and can be clicked
      * @author Rubens Lobo
      */
     public static boolean verifyElementIsClickable(By by) {
-        log.info(String.format("Verificando se o elemento via locator %s e visivel e clicavel", by.toString()));
+        log.info(parser.parse("verifications.verify.element.is.visible.and.clickable", new Object[]{by.toString()}));
         WebElement element = Action.getClickableElement(by);
         highlightElement(element);
         return true;
@@ -143,11 +145,11 @@ public class Verifications extends DriverManager {
     /**
      * Verifies if the given element is visible.
      *
-     * @param by      Type of "By"
+     * @param by Type of "By"
      * @author Rubens Lobo
      */
     public static boolean verifyElementIsVisible(By by) {
-        log.info(String.format("Verificando o elemento via locator %s e visivel", by.toString()));
+        log.info(parser.parse("verifications.verify.element.is.visible", new Object[]{by.toString()}));
         WebElement element = Action.getVisibleElement(by);
         highlightElement(element);
         return true;
@@ -156,11 +158,11 @@ public class Verifications extends DriverManager {
     /**
      * Verifies if an element is not on screen
      *
-     * @param by      Type of "By"
+     * @param by Type of "By"
      * @author Rubens Lobo
      */
     public static void verifyElementDoesNotExist(By by) {
-        log.info(String.format("Verificando se o elemento via locator %s nao esta visivel na tela", by.toString()));
+        log.info(parser.parse("verifications.verify.element.does.not.exist", new Object[]{by.toString()}));
         WebDriverWait wait = new WebDriverWait(getDriver(), configuration.timeout());
         ExpectedCondition elementIsDisplayed = (ExpectedCondition<Boolean>) webDriver -> {
             try {
